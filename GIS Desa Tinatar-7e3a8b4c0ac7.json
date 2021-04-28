@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "gis-desa-tinatar",
+  "private_key_id": "7e3a8b4c0ac784285b3fa0ea3262c505806241a4",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCy3V2R/m/sfAFf\nworSElfyIA8k/ALQ3K6XkdanoKLuzxqxakOacZp3FJVrK8yfPEXi3y3KbhucsP8z\nbJSSoYOWXD0prIg6gTPtbqRxd8gXGDmhZus00wyRnO9H5drGKCBGzXFkFul0yuaF\nLzFwUTXCFFW9MB4WFp4D0DhLl2fzeLhITsPI/AKwhh5KbJEdb03x1neDSsw2iQcV\niHoC3w4coDOYcb0xu+kVakrDwvBOLLMA74T72IzLHP1F+WcT3pzwBLVdYcDp9mag\nW8nqs3UwEMD3u6BbxdrJafJPD16Ps8rdbSqFEMGFXyWDnE2/beRWt+xPTM1JC4mw\n2RxPr6XlAgMBAAECggEACX5qTUm+pJmCFCm2EceYpJjS3PZwatLP2eqLL3toB+TK\nc1YjL6Mt3PoPd/Bg9ycX7t5u5ogDeK9vYvTK37aUJAq80gW0TGYCZ4JK1wf8gPdP\noHN0nWmXXkeWGXrylWKDW2a5CPmWBirlOKFZjoSM+y0g+OlWgNB4ritNlaY8GwY7\nk1iXfI0bKNpzlJgg47xRNwALjQTdY1rhjVS/iEyHEP2eSfXrqBTxQw2hkc+WZ1Q8\nwMmnURSk6gu7eSNKrHzz8ApiO+wCN42tmccVJFgLr1cOuxNCI2ge65SrcToVFtrz\ntlHqeW6arlhfaQfKc02mLnl8EIa4SpOR49YplytQMQKBgQDul9xsLwdKe4ipBP5Z\nyAKtfDamuG0bcUdlINTiTocI2Wc6odqdn5sYQ8wq2FkO+5+ss0HSrGUIa1HoNCrf\nthdq+ue3vxou0jgP7fORjyLUyhlkZ3uoRhjqaqAA+MMbrkipPl30M4yDguG/+6xC\nuWe43iDtWCj34CGGPVDmyz/nMQKBgQC/6fjQvM03FalwHcdy9dYKV8Nbeu59JasM\nqBAUH15RCaWWdYd+mp1iNvgwBCdkLvO66VjijUW68RrAbCQrFZxVJEG2PbauFZFm\nEA8wygO2PtiNLi5/4GAA/l54b+/qU/gnyg2NlirGd6u1+bjynUTnKU40Cy3noHmT\n7X8jTyyk9QKBgQCmzt9Zd2u2hDWgTZByPqa4mb4vw4Lsi78pkdGkQtiftDc6w8vv\nJZYuWcAVOFrTYdJZ0J21Z7ffMgD6wfYzn8AxmCeGzIHGuExfvrHqU1M7x+wGyV6n\n4BItWcxxwXnPEYNVZ/gR8jRMAaZJLfBaWfuNQSduKJPD8RwfGSFFqlYMEQKBgGP1\nYtKeNCkn0DwEVrkrEJQMiEVir0thzkjmVJGWkRKWerf2eV9Y+vaH+RdRYo8M4YgO\nOGyv9ozbPfrRmLkUJXw3ST65wCfGNhg57x+TaQGIlFRcpH2YiYia9Ou4KfccS1m2\nJP8FIzyCYl6DNnCvt47Ldd8nn35QmGKTRjBG8dLtAoGAaV6B+sQZPiewyi3D/j4k\n8kVUj+RVGtumoJPGIjqBlR9HXjXEpfitpk5PbN9ttmI49ALgeIPW9gPwi36qamgv\n74xx3TO4C+JSFSYRvcl0nKLIKmOv5MZ/NcyGTPf3J20EKRKArCK82Y56CezNRl1B\n6wlIMAC08LhBPeUVO41AMPU=\n-----END PRIVATE KEY-----\n",
+  "client_email": "gis-desa-tinatar@gis-desa-tinatar.iam.gserviceaccount.com",
+  "client_id": "115109778478908840177",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/gis-desa-tinatar%40gis-desa-tinatar.iam.gserviceaccount.com"
+}

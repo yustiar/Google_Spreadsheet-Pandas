@@ -1,0 +1,531 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block heading %}
+    <h1>{{Heading}}</h1>                
+{% endblock heading %}
+
+{% block content %}
+    <div class="line"></div>
+        <div class="row pb-4">
+            <div class="col-sm-4">
+                <div class="card overflow-hidden shadow border-left-danger">
+                    <div class="card-content">
+                        <div class="card-body cleartfix">
+                            <div class="media align-items-stretch">
+                                <div class="align-self-center">
+                                    <i class="material-icons mr-3" style="font-size:60px;color:#d9534f;">store</i>
+                                </div>
+                                <div class="media-body">
+                                    <h4>Jumlah SLS</h4>
+                                    <span>Jumlah RT yang ada pada database</span>
+                                </div>
+                                <div class="align-self-center">
+                                    <h1 class="text-danger">{{jumlahsls_info_card}}</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>  
+            <div class="col-sm-4">
+                <div class="card overflow-hidden shadow border-left-info">
+                    <div class="card-content">
+                        <div class="card-body cleartfix">
+                            <div class="media align-items-stretch">
+                                <div class="align-self-center">
+                                    <i class="material-icons mr-3" style="font-size:60px;color:#5bc0de;">person_outline</i>
+                                </div>
+                                <div class="media-body">
+                                    <h4>Jumlah KK</h4>
+                                    <span>Jumlah KK yang ada pada database</span>
+                                </div>
+                                <div class="align-self-center">
+                                    <h1 class="text-info">{{jumlahkk_info_card}}</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>  
+            <div class="col-sm-4">
+                <div class="card overflow-hidden shadow border-left-warning">
+                    <div class="card-content">
+                        <div class="card-body cleartfix">
+                            <div class="media align-items-stretch">
+                                <div class="align-self-center">
+                                    <i class="material-icons mr-3" style="font-size:60px;color:#f0ad4e;">people_outline</i>
+                                </div>
+                                <div class="media-body">
+                                    <h4>Jumlah Penduduk</h4>
+                                    <span>Jumlah penduduk pada database</span>
+                                </div>
+                                <div class="align-self-center">
+                                    <h1 class="text-warning">{{jumlahpddk_info_card}}</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>  
+        </div>
+        <div class="row pb-4">
+            <div class="col-sm-12">
+                <div class="card shadow" >
+                    <div class="card-header bg-dark d-flex flex-row align-items-center justify-content-between bg-dark">
+                        <h6 class="m-0 font-weight-bold text-white">Grafik Desa Tinatar</h6>
+                    </div>
+
+                    <div class="card-body p-0">
+                        <div id="grafik"></div>
+                    </div>
+                    <div>
+                        
+                    </div>
+                </div>
+            </div>  
+        </div>
+        <div id='menus' class="row pb-4">
+            <div class="col-sm-12">
+                <div class="card shadow mb-2" >
+                    <div class="card-header d-flex flex-row align-items-center justify-content-between bg-dark">
+
+                        <h6 class="m-0 font-weight-bold text-white">Peta Desa Tinatar</h6>
+                        
+                        <div class="dropdown">
+                            <button class="btn bg-warning py-0 font-weight-bold" type="button" data-toggle="dropdown">
+                                <i class="fas fa-bars" style="font-size:24px"></i>
+                                <span class="caret"></span>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in p-2" onClick="event.stopPropagation();">
+                                <div class="dropdown-divider"></div>
+                                <p class="h6 ">Pilih Base Layer</p> 
+                                <div class="form-check p-0">
+                                    <label class="containerradio">Peta Satelit
+                                        <input class="form-check-input" type="radio" name="baseradio" id="exampleRadios1" value="PetaSatelit" checked>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="containerradio">Peta StreetView
+                                        <input class="form-check-input" type="radio" name="baseradio" id="exampleRadios1" value="PetaStreetView">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>   
+                                <div class="dropdown-divider"></div>
+                                <p class="h6 ">Leaflet Control</p>
+                                
+                                <input type="checkbox" id="markerCheck"  onclick="switchMarker()" checked> Marker <br>
+                                
+                                <input type="checkbox" id="geojsonCheck"  onclick="switchGeoJson()" checked> GeoJson Desa <br>
+                                <input type="checkbox" id="geojsonCheck2"  onclick="switchGeoJson2()" checked> GeoJson SLS <br>
+                                <input type="checkbox" id="infoCheck"  onclick="switchInfo()" checked> Info <br>
+                                <div class="dropdown-divider"></div>
+                                <p class="h6 ">Pilih Data Peta</p>
+                                <div class="dropdown-divider"></div>
+                                <p class="h6 ">Filter Marker</p>  
+                                <div id="filter2">
+                                    <select class="p-0 mx-2" id="select_filter_map2" style="min-height:20px;min-width:100px;" required onchange="filter_this_wil()"> 
+                                        <option value="" disabled selected>Pilih RT</option>
+                                        {% for ind,alamat in alamat_dropdown %}
+                                            <option value="{{ind}}">{{alamat}}</option>
+                                        {% endfor %}   
+                                        <option value="100000">Semua RT</option>         
+                                    </select>
+                                    
+                                </div>
+                                
+                            </div>
+                        </div>                      
+                    </div>
+
+                    <div class="card-body p-0">
+                        <div id="map"></div>
+
+                    </div>
+                    <div>
+                        
+                    </div>
+                </div>  
+            </div>     
+        </div>
+    
+    
+{% endblock content %}
+
+{% block scripts %}
+    {% include "snippets/scripts.html" %}
+    <script type="text/javascript">
+
+       $(document).ready(function () {
+            $("#sidebar").mCustomScrollbar({
+                theme: "minimal"
+            });
+
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar, #content').toggleClass('active');
+                $('.collapse.in').toggleClass('in');
+                $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+
+
+
+        var map = L.map('map',{
+            zoomControl : false,
+            preferCanvas : true
+        }).setView([-8.083286564,111.108279], 13);
+        
+        L.control.zoom({
+            position:'bottomleft'
+        }).addTo(map);
+
+        var tilelayer1 =  L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',{
+                maxZoom: 20,
+                subdomains:['mt0','mt1','mt2','mt3'],
+                attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+                    '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+                id: 'openstreetmap'
+        })
+        var tilelayer2 =  L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',{
+                maxZoom: 20,
+                subdomains:['mt0','mt1','mt2','mt3'],
+                attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+                    '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+                id: 'openstreetmap'
+        })
+
+        tilelayer1.addTo(map);
+        var geojsonGroup2=[];
+        var sls_only = {{alamat_only|safe}};
+        var marker_geojson = {{marker_geojson|safe}};
+
+        var myIcon = L.icon({
+            iconUrl: 'https://i.imgur.com/F6JAUs7.png',
+            iconSize: [40, 60],
+            iconAnchor:  [18, 50],
+            popupAnchor: [4, -50],
+        });
+        for (var i = 0; i < sls_only.length; i++) {
+            sls_only2 = sls_only[i];
+            geojson2 = L.geoJson(marker_geojson, {
+                filter: function picnicFilter2(feature) {
+                    return feature.properties.alamat == sls_only2;
+                },
+                pointToLayer: function (feature, latlng) {
+                    return L.marker(latlng, {icon: myIcon});
+                },
+
+            });
+            geojson2.eachLayer(function (layer) {
+                layer.bindPopup(
+                    '<h5>Informasi Rumah Tangga</h5>'+
+                    '<img src='+layer.feature.properties.linkrumah+' width="300"></br>'+
+                    '<div class="line m-1"></div>'+
+                    '<div class="table-responsive">'+
+                    '<table class="table myTable table-borderless table-striped table-sm">'+
+                        '<thead>'+
+                            '<tr>'+
+                                '<th scope="col">SLS</th>'+
+                                '<th scope="col">'+layer.feature.properties.alamat+'</th>'+
+                            '</tr>'+
+                        '</thead>'+
+                        '<tbody>'+
+                            '<tr>'+
+                                '<th scope="col">Kepala Ruta</th>'+
+                                '<td scope="col">'+layer.feature.properties.nama+'</td>'+
+                            '</tr>'+
+                            '<tr>'+
+                                '<th scope="col">Nomor HP</th>'+
+                                '<td scope="col">'+layer.feature.properties.nomorhp+'</td>'+
+                            '</tr>'+
+                            '<tr>'+
+                                '<th scope="col">Jumlah ART</th>'+
+                                '<td scope="col">'+layer.feature.properties.jumlahart+'</td>'+
+                            '</tr>'+
+                            '<tr>'+
+                                '<th scope="col">Koordinat</th>'+
+                                '<td scope="col">'+layer.feature.properties.latitude+', '+layer.feature.properties.longitude+'</td>'+
+                            '</tr>'+
+                      '</tbody>'+
+                    '</table>'+
+                    '</div>'    
+                    
+                );
+            });
+            geojsonGroup2.push(geojson2);
+        }
+        for (var i = 0; i < geojsonGroup2.length; i++) {
+            map.addLayer(geojsonGroup2[i]);
+        }
+        
+
+        var info = L.control({
+            position:'topleft'
+        }
+        );
+
+
+
+        info.onAdd = function (map) {
+            this._div = L.DomUtil.create('div', 'info');
+            this.update();
+            return this._div;
+        };
+
+        info.update = function (props) {
+            this._div.innerHTML = 
+                '<div class="card bg-light" style="max-width: 20rem;">'+
+                    '<div class="card-header bg-info text-white h5 font-weight-bold">Peta Penduduk Desa Tinatar</div>'+
+                    '<div class="card-body p-1">'+
+                            (props ? '<p class="h6 font-weight-bold">'+props.sls_non+'</p>'+
+                            '<table class="table info_table m-0">'+
+                                '<tbody>'+
+                                    '<tr>'+
+                                        '<td class="p-1">Jumlah KK</td>'+
+                                        '<td class="p-1"> : '+props.jumlah_kk+'</td>' +    
+                                    '</tr>'+
+                                    '<tr>'+
+                                        '<td class="p-1">Nama Ketua SLS</td>'+
+                                        '<td class="p-1"> : '+props.ketua_sls+'</td>'+
+                                    '</tr>'+
+                                    '<tr>'+
+                                        '<td class="p-1">Nomor HP</td>'+
+                                        '<td class="p-1"> : '+props.no_hp+'</td>'+
+                                    '</tr>'+
+                                '</tbody>'+
+                            '</table>'
+                            : '<p class="h6">Hover pada sls</p>')+
+                    '</div>'+
+                '</div>';
+
+    
+        };
+
+        info.addTo(map);
+
+        var centerinfo = L.control({
+            position:'topright'
+        });
+
+        centerinfo.onAdd = function (map) {
+            this._div = L.DomUtil.create('div', 'centerinfo');
+            this.update();
+            return this._div;
+        };
+
+        centerinfo.update = function (props) {
+            this._div.innerHTML = 
+                '<button type="button" class="btn btn-info text-white mb-3" id="tes">Pusatkan Peta</button>'
+        };
+        centerinfo.addTo(map);
+
+        function getColor(d) {
+            return d > 70 ? '#800026' :
+                   d > 60  ? '#BD0026' :
+                   d > 50  ? '#E31A1C' :
+                   d > 40  ? '#FC4E2A' :
+                   d > 30   ? '#FD8D3C' :
+                   d > 20   ? '#FEB24C' :
+                   d > 10   ? '#FED976' :
+                              '#FFEDA0';
+        }
+
+        function style(feature) {
+            return {
+                fillColor: getColor(feature.properties.jumlah_kk),
+                weight: 2,
+                opacity: 1,
+                color: 'white',
+                dashArray: '3',
+                fillOpacity: 0.5
+            };
+        }
+
+
+        function highlightFeature(e) {
+            var layer = e.target;
+            layer.setStyle({
+                weight: 5,
+                color: 'blue',
+                dashArray: '',
+                fillOpacity: 0.3
+            });
+
+            if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+                layer.bringToFront();
+            }
+
+            info.update(layer.feature.properties);
+        }
+
+        var geojson;
+
+        function resetHighlight(e) {
+            geojson.resetStyle(e.target);
+            info.update();
+        }
+
+        function zoomToFeature(e) {
+            map.fitBounds(e.target.getBounds());
+        }
+
+        function onEachFeature(feature, layer) {
+            layer.on({
+                mouseover: highlightFeature,
+                mouseout: resetHighlight,
+                click: zoomToFeature
+            });
+        }
+
+         geojson = L.geoJson(statesData, {
+            style: style,
+            onEachFeature: onEachFeature
+         }).addTo(map);
+
+         var geojson_kec = L.geoJson(kec_tinatar, {
+         }).addTo(map);
+         geojson_kec.bringToBack();
+
+
+         //SWITCH
+        function switchGeoJson() {
+            var checkBox = document.getElementById("geojsonCheck");
+                if (checkBox.checked == false){
+                    map.removeLayer(geojson_kec);
+                } else {
+                    geojson_kec.addTo(map);
+                    geojson_kec.bringToBack();
+                }
+            
+        }
+
+        function switchGeoJson2() {
+            var checkBox = document.getElementById("geojsonCheck2");
+                if (checkBox.checked == false){
+                    map.removeLayer(geojson);
+                } else {
+                    geojson.addTo(map);
+                    geojson.bringToBack();
+                    geojson_kec.bringToBack();
+                }
+            
+        }
+        
+        function switchInfo() {
+            var checkBox = document.getElementById("infoCheck");
+            if (checkBox.checked == false){
+                map.removeControl(info);
+                map.removeControl(centerinfo);
+            } else {
+                info.addTo(map);
+                centerinfo.addTo(map);
+            }   
+        }
+
+        function switchMarker() {
+            var checkBox = document.getElementById("markerCheck");
+            if (checkBox.checked == false){
+                for (var i = 0; i < allmarker.length; i++) {
+                    map.removeLayer(allmarker[i]);
+                }
+            } else {
+                for (var i = 0; i < allmarker.length; i++) {
+                    allmarker[i].addTo(map);
+                }
+            }
+        }
+
+
+        function filter_this_wil(){
+            var e2 = document.getElementById("select_filter_map2");
+            var strUser2 = e2.options[e2.selectedIndex].value;
+            var strUser3 = parseInt(strUser2.split("-")[0]);
+            console.log(strUser3);
+            var data=[];
+
+            data = geojsonGroup2;
+
+            if(strUser3<100){
+                for (var i = 0; i < sls_only.length; i++) {
+                    map.removeLayer(data[i]);
+                }
+                map.addLayer(data[strUser3-1]);
+                
+            }else{
+                for (var i = 0; i < sls_only.length; i++) {
+                    map.removeLayer(data[i]);
+                }
+                for (var i = 0; i < sls_only.length; i++) {
+                    map.addLayer(data[i]);
+                }
+            }         
+        }
+         
+        $(document).ready(function() {
+            $('input:radio[name=baseradio]').change(function() {
+                if (this.value == 'PetaSatelit') {
+                    map.removeLayer(tilelayer1);
+                    map.removeLayer(tilelayer2);
+                    map.addLayer(tilelayer1);
+                }
+                else if (this.value == 'PetaStreetView') {
+                    map.removeLayer(tilelayer1);
+                    map.removeLayer(tilelayer2);
+                    map.addLayer(tilelayer2);
+                }
+            });
+        });
+        var bounds = geojson.getBounds()
+        $("#tes").click(function(){
+            map.fitBounds(bounds);
+        });
+    </script>
+
+
+    <script type="text/javascript">
+        Highcharts.chart('grafik', {
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Jumlah KK dan Penduduk per SLS'
+            },
+            xAxis: {
+                categories: {{slscounttext|safe}},
+                crosshair: true
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Rainfall (mm)'
+                }
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
+                }
+            },
+            series: [{
+                name: 'Jumlah KK',
+                data: {{slscountnum|safe}}
+
+            }, {
+                name: 'Jumlah Penduduk',
+                data: [100,123,89]
+
+            }]
+        });
+
+    </script>
+{% endblock scripts %}
